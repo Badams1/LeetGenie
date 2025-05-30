@@ -1,0 +1,196 @@
+/* LeetGenie Extension Styles */
+
+.leetgenie-hint-container {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #ff6b35;
+}
+
+#leetgenie-hint-button {
+    position: relative;
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: fit-content;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+#leetgenie-hint-button:hover {
+    background: linear-gradient(135deg, #e55a2b, #e8851a);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+#leetgenie-hint-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+#leetgenie-hint-button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#leetgenie-hint-button .lightbulb-icon {
+    width: 16px;
+    height: 16px;
+    background: #ffff00;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    margin-right: 2px;
+    flex-shrink: 0;
+}
+
+#leetgenie-hint-button .lightbulb-icon::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 4px;
+    background: #ffff00;
+    border-radius: 0 0 4px 4px;
+}
+
+#leetgenie-hint-button.loading .lightbulb-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Modal styles */
+.leetgenie-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.leetgenie-modal-content {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    color: #f9fafb;
+}
+
+.leetgenie-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #374151;
+}
+
+.leetgenie-modal-header h3 {
+    margin: 0;
+    color: #f9fafb;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.leetgenie-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.leetgenie-modal-close:hover {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+.leetgenie-hint-content {
+    color: #e5e7eb;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.leetgenie-hint-content p {
+    margin: 0;
+    color: #e5e7eb;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .leetgenie-hint-modal-content {
+        background: #1f2937;
+        color: #f9fafb;
+    }
+    
+    .leetgenie-hint-header {
+        border-bottom-color: #374151;
+    }
+    
+    .leetgenie-hint-body p {
+        color: #e5e7eb;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .leetgenie-hint-modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .leetgenie-hint-header {
+        padding: 16px 20px 12px;
+    }
+    
+    .leetgenie-hint-header h3 {
+        font-size: 16px;
+    }
+    
+    .leetgenie-hint-body {
+        padding: 20px;
+    }
+    
+    .leetgenie-hint-body p {
+        font-size: 14px;
+    }
+}
+
+/* Button icon styling */
+.leetgenie-hint-btn svg {
+    flex-shrink: 0;
+} 

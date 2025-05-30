@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetGenie Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .icon-size {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .icon-size img {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .download-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+        #original-svg {
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 LeetGenie Icon Generator</h1>
+        <p>This tool generates PNG icons in different sizes for the Chrome extension from the SVG source.</p>
+        
+        <div id="original-svg">
+            <h3>Original SVG Icon:</h3>
+            <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Simple gradient for background -->
+                    <radialGradient id="bgGradient" cx="50%" cy="40%">
+                        <stop offset="0%" style="stop-color:#FF8C42;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF6B1A;stop-opacity:1" />
+                    </radialGradient>
+                </defs>
+                
+                <!-- Background circle -->
+                <circle cx="64" cy="64" r="58" fill="url(#bgGradient)" stroke="none"/>
+                
+                <!-- Main lightbulb body -->
+                <circle cx="64" cy="50" r="22" fill="#FFD700" stroke="#E6C200" stroke-width="2"/>
+                
+                <!-- Bottom part of bulb (neck) -->
+                <rect x="54" y="68" width="20" height="8" fill="#FFD700" stroke="#E6C200" stroke-width="2"/>
+                
+                <!-- Screw base -->
+                <rect x="52" y="76" width="24" height="14" rx="2" fill="#C0C0C0" stroke="#A0A0A0" stroke-width="2"/>
+                
+                <!-- Screw thread lines -->
+                <line x1="54" y1="80" x2="74" y2="80" stroke="#808080" stroke-width="1.5"/>
+                <line x1="54" y1="84" x2="74" y2="84" stroke="#808080" stroke-width="1.5"/>
+                <line x1="54" y1="87" x2="74" y2="87" stroke="#808080" stroke-width="1.5"/>
+                
+                <!-- Simple filament -->
+                <path d="M 58 45 L 70 45 M 58 50 L 70 50 M 58 55 L 70 55" stroke="#CC9900" stroke-width="2" stroke-linecap="round"/>
+                
+                <!-- Simple highlight -->
+                <circle cx="58" cy="44" r="4" fill="rgba(255,255,255,0.6)" />
+            </svg>
+        </div>
+
+        <button onclick="generateIcons()" style="background: #ff6b35; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer;">
+            🚀 Generate All Icons
+        </button>
+
+        <div class="icon-preview" id="icon-preview">
+            <!-- Generated icons will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function generateIcons() {
+            const sizes = [16, 32, 48, 128];
+            const preview = document.getElementById('icon-preview');
+            preview.innerHTML = '';
+
+            const svgString = document.querySelector('#original-svg svg').outerHTML;
+
+            sizes.forEach(size => {
+                // Create canvas for conversion
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Create image from SVG
+                const img = new Image();
+                const svg = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
+                const url = URL.createObjectURL(svg);
+
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, size, size);
+                    
+                    // Convert to PNG
+                    canvas.toBlob(function(blob) {
+                        const pngUrl = URL.createObjectURL(blob);
+                        
+                        // Create preview element
+                        const iconDiv = document.createElement('div');
+                        iconDiv.className = 'icon-size';
+                        iconDiv.innerHTML = `
+                            <h4>${size}x${size}</h4>
+                            <img src="${pngUrl}" alt="Icon ${size}x${size}">
+                            <br>
+                            <button class="download-btn" onclick="downloadIcon('${pngUrl}', 'icon${size}.png')">
+                                Download PNG
+                            </button>
+                        `;
+                        
+                        preview.appendChild(iconDiv);
+                    }, 'image/png');
+                    
+                    URL.revokeObjectURL(url);
+                };
+
+                img.src = url;
+            });
+        }
+
+        function downloadIcon(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html> 
