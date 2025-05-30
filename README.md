@@ -24,13 +24,18 @@
    - Clone this repository or download as ZIP
    - Extract to a folder on your computer
 
-2. **Load in Chrome**:
+2. **Set up OpenAI API Key**:
+   - Open `background.js` in a text editor
+   - Replace `YOUR_OPENAI_API_KEY_HERE` with your actual OpenAI API key
+   - Get your API key from [OpenAI's platform](https://platform.openai.com/api-keys)
+
+3. **Load in Chrome**:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top right)
    - Click "Load unpacked"
    - Select the `LeetGenie` folder
 
-3. **Start Using**:
+4. **Start Using**:
    - Navigate to any LeetCode problem
    - Look for the "Get Hint" button in the header tabs (next to Description, Editorial, Solutions)
    - Click to get intelligent hints!
