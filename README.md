@@ -47,7 +47,7 @@ https://chromewebstore.google.com/detail/leetgenie/eodogpbkkimfpclkdjlglkjjdfepj
 - **Problem Analysis**: Extracts problem title and description for context-aware hints
 - **Responsive Design**: Works on all screen sizes and integrates seamlessly with LeetCode's UI
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 LeetGenie/
